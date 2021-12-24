@@ -32,16 +32,15 @@ function calcularPrecioFinal () {
 
     let descuento;
 
-    switch(cuponValor){
-        case cupones[0]:
-            descuento = 10;
-            break;
-        case cupones[1]:
-            descuento = 20;
-            break;
-        case cupones[2]:
-            descuento = 30;
-            break;
+    //Usando array.includes() para detectar el error first
+    if(!cupones.includes(cuponValor)) {
+        alert(`El cupón ${cuponValor} no es válido`)
+    } else if (cuponValor === "descuento uno") {
+        descuento = 10;
+    } else if (cuponValor === "descuento dos") {
+        descuento = 20;
+    } else if (cuponValor === "descuento tres" ) {
+        descuento = 30;
     }
 
     const precioFinal =calcularPrecioConDescuento(precioValor, descuento);
