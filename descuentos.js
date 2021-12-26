@@ -1,51 +1,47 @@
-// const precioOriginal = 100;
-// const descuento = 15;
-// const porcentajePrecioConDescuento = 100 - descuento;
-// const precioConDescuento = (precioOriginal * porcentajePrecioConDescuento) / 100;
-
-// console.log({
-//     precioOriginal,
-//     descuento,
-//     porcentajePrecioConDescuento,
-//     precioConDescuento
-// });
-
-//Array con cupones de descuento
-const cupones = [
-    "descuento uno",
-    "descuento dos",
-    "descuento tres"
+const coupons = [
+    {
+        name: "descuento uno",
+        discount: 10,
+    },
+    {
+        name: "descuento dos",
+        discount: 20,
+    },
+    {
+        name: "descuento tres",
+        discount: 30,
+    },
+    {
+        name: "descuento cuatro",
+        discount: 40,
+    },
 ];
 
-function calcularPrecioConDescuento (precio, descuento) {
-    const precioDescuento = precio * (100 - descuento) / 100;
+function calcularPrecioConDescuento(precio, descuento){
+    const porcentajeDelPrecioConDescuento = 100 - descuento;
+    const precioConDescuento = (precio * porcentajeDelPrecioConDescuento)/ 100;
+  
+    return precioConDescuento;
+  
+  }
 
-    return precioDescuento;
-}
+function calcularPrecioFinal() {
+    const inputPrice = document.getElementById("inputPrice");
+    const priceValue = inputPrice.value;
+    
+    const inputCoupon = document.getElementById("inputCoupon");
+    const couponValue = inputCoupon.value;
 
-function calcularPrecioFinal () {
-    const precio = document.getElementById('inputPrice');
-    const cupon = document.getElementById('inputCoupon');
+    const userCoupon = coupons.find((coupon) => coupon.name === couponValue);
 
-    const precioValor = precio.value;
-    const cuponValor = cupon.value;
+    if (!userCoupon) {
+        alert("El cupón " + couponValue + " no es válido");
+    } else {
+        const descuento = userCoupon.discount;
+        const precioConDescuento = calcularPrecioConDescuento(priceValue, descuento);
 
-    let descuento;
-
-    //Usando array.includes() para detectar el error first
-    if(!cupones.includes(cuponValor)) {
-        alert(`El cupón ${cuponValor} no es válido`)
-    } else if (cuponValor === "descuento uno") {
-        descuento = 10;
-    } else if (cuponValor === "descuento dos") {
-        descuento = 20;
-    } else if (cuponValor === "descuento tres" ) {
-        descuento = 30;
+        const resultP = document.getElementById("resultPrice");
+        resultP.innerText = "El precio con descuento es de: $" + precioConDescuento;
     }
 
-    const precioFinal =calcularPrecioConDescuento(precioValor, descuento);
-
-    const valorPrecioFinal = document.getElementById('resultPrice');
-
-    valorPrecioFinal.innerText = `Precio final con descuento del ${descuento}% es de ${precioFinal}`;
-}
+} 
