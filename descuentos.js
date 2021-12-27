@@ -32,7 +32,9 @@ function calcularPrecioFinal() {
     const inputCoupon = document.getElementById("inputCoupon");
     const couponValue = inputCoupon.value;
 
-    const userCoupon = coupons.find((coupon) => coupon.name === couponValue);
+    const userCoupon = coupons.find((coupon) => 
+        coupon.name === couponValue
+    );
 
     if (!userCoupon) {
         alert("El cupón " + couponValue + " no es válido");
